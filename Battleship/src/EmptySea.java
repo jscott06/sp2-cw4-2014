@@ -20,4 +20,8 @@ public class EmptySea extends Ship {
 		// Returns a single-character String to use in the Ocean’s print method
 		return "";
 	}
+	
+	@Override String getShipType() {
+		return "EmptySea";
+	}
 }

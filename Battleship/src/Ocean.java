@@ -1,4 +1,3 @@
-
 public class Ocean {
 	
 	private Ship[][] ships = new Ship[10][10];
@@ -11,6 +10,18 @@ public class Ocean {
 		The constructor Creates an empty ocean (fills the ships array with EmptySeas).
 		Also initialises any game variables, such as how many shots have been fired.
 		*/
+		fillSea();
+		shotsFired = 0;
+		hitCount = 0;
+		shipsSunk = 0;
+	}
+	
+	private void fillSea(){
+		for(int row = 0; row < 10; row++){
+			for(int column = 0; column < 10; column++){
+				ships[column][row] = new EmptySea();
+			}
+		}
 	}
 	
 	void placeAllShipsRandomly() {
@@ -26,6 +37,13 @@ public class Ocean {
 		Returns true if the given location contains
 		a ship, false if it does not.
 		*/
+		// WON'T WORK UNTIL I'VE IMPLEMENTED placeShipAt
+		//		System.out.println(getShipArray()[row][column].getShipType());
+		//		if (getShipArray()[row][column].getShipType() == "EmptySea") {
+		//			return false;
+		//		} else { 
+		//			return true;
+		//		}
 		return false;
 	}
 	
@@ -75,9 +93,5 @@ public class Ocean {
 		from the BattleshipGame class.
 		 */
 	}
-	
-	
-	
-	
 
 }

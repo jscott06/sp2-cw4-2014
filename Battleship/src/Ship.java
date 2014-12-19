@@ -3,8 +3,18 @@ public class Ship {
 	private int bowRow;
 	private int bowColumn;
 	private int length;
-	private boolean horizontal;
-	boolean [] hit;
+	private boolean horizontal = false;
+	private boolean [] hit;
+	
+	void initializeHitArray(){	
+		hit = new boolean[getLength()];
+		for(int i = 0; i < hit.length; i++){
+			hit[i] = false;
+		}
+	}
+	boolean [] getHits(){
+		return hit;
+	}
 	
 	int getBowRow() {
 		return bowRow;
@@ -31,8 +41,12 @@ public class Ship {
 		return length;
 	}
 	
+	void setLength(int length){
+		this.length = length;
+	}
+	
 	void setHorizontal(boolean horizontal){
-		
+		this.horizontal = horizontal;
 	}
 	
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
@@ -55,6 +69,7 @@ public class Ship {
 		object. (Note: This will be as many as four identical references; you can’t refer to
 		a part of a ship, only to the whole ship.)
 		*/
+		
 	}
 	
 	boolean shootAt(int row, int column)  {
