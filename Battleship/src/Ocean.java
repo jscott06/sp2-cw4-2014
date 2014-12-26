@@ -37,6 +37,7 @@ public class Ocean {
 		Returns true if the given location contains
 		a ship, false if it does not.
 		*/
+		System.out.println(getShipArray()[row][column].getShipType()); // for debugging TO REMOVE
 		if (getShipArray()[row][column].getShipType() == "EmptySea") {
 			return false;
 		} else { 

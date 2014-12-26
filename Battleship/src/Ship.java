@@ -3,7 +3,7 @@ public class Ship {
 	private int bowRow;
 	private int bowColumn;
 	private int length;
-	private boolean horizontal = false;
+	private boolean horizontal;
 	private boolean [] hit;
 	
 	void initializeHitArray(){	
@@ -89,6 +89,10 @@ public class Ship {
 		object. (Note: This will be as many as four identical references; you can’t refer to
 		a part of a ship, only to the whole ship.)
 		*/
+		setHorizontal(horizontal);
+		setBowRow(row);
+		setBowColumn(column);
+		
 		for(int i = 0; i < this.getLength(); i++){
 			if (horizontal == true){
 				ocean.getShipArray()[row][column + i] = this;
@@ -99,18 +103,37 @@ public class Ship {
 	}
 	
 	boolean shootAt(int row, int column)  {
-		// TODO
 		/* 
 		If a part of the ship occupies the given row
 		and column, and the ship hasn’t been sunk, mark that part of the ship as hit (in
 		the hit array, 0 indicates the bow) and return true, otherwise return false.
 		*/
+		if (!isSunk()){
+			if (getBowRow() == row || getBowColumn() == column){ // must be on same column or row
+				for(int i = 0; i < this.getLength(); i++){
+					if (isHorizontal()){
+						if (getBowColumn() + i == column){ // will need to check if has been hit already
+							getHits()[i] = true; // mark as hit
+							return true;
+						}
+					} else {
+						if (getBowRow() + i == row){ // will need to check if has been hit already
+							getHits()[i] = true; // mark as hit
+							return true;
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
 	
 	boolean isSunk(){
-		// TODO
-		// Return true if every part of the ship has been hit, false otherwise.
-		return false;
+		for(boolean hit : getHits()){
+			if (hit == false)
+				return false;
+		}
+		return true;
+		
 	}
 }

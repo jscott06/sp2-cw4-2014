@@ -2,7 +2,7 @@
 public class EmptySea extends Ship {
 	
 	@Override boolean shootAt(int row, int column) {
-		/* TODO
+		/*
 		This method overrides shootAt(int row, int column) that is inherited from Ship, 
 		and always returns false to indicate that nothing was hit
 		 */
