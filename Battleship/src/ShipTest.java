@@ -29,6 +29,24 @@ public class ShipTest {
 	@Test
 	public void testOkToPlaceShipAt(){
 		
+		Ocean ocean = new Ocean();
+		Battleship battleship = new Battleship();
+		
+		assertEquals(true, battleship.okToPlaceShipAt(0, 0, true, ocean));
+		
+		// going over the border
+		assertEquals(false, battleship.okToPlaceShipAt(0, 9, true, ocean));
+		assertEquals(false, battleship.okToPlaceShipAt(9, 0, false, ocean));
+		
+		// going over other boats
+		Battleship battleship2 = new Battleship();
+		assertEquals(true, battleship2.okToPlaceShipAt(0, 2, true, ocean));
+		assertEquals(true, battleship2.okToPlaceShipAt(0, 2, false, ocean));
+		
+		battleship.placeShipAt(0, 0, true, ocean);
+
+		assertEquals(false, battleship2.okToPlaceShipAt(0, 2, true, ocean));
+		assertEquals(false, battleship2.okToPlaceShipAt(0, 2, false, ocean));
 	}
 	
 	@Test
