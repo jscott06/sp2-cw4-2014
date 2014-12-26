@@ -33,18 +33,15 @@ public class Ocean {
 	}
 	
 	boolean isOccupied(int row, int column) {
-		/* TODO
+		/*
 		Returns true if the given location contains
 		a ship, false if it does not.
 		*/
-		// WON'T WORK UNTIL I'VE IMPLEMENTED placeShipAt
-		//		System.out.println(getShipArray()[row][column].getShipType());
-		//		if (getShipArray()[row][column].getShipType() == "EmptySea") {
-		//			return false;
-		//		} else { 
-		//			return true;
-		//		}
-		return false;
+		if (getShipArray()[row][column].getShipType() == "EmptySea") {
+			return false;
+		} else { 
+			return true;
+		}
 	}
 	
 	boolean shootAt(int row, int column)  {

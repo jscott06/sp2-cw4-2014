@@ -61,7 +61,6 @@ public class Ship {
 	}
 	
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
-		// TODO
 		/* 
 		Puts the ship in the ocean. This involves giving values to the bowRow, bowColumn, and
 		horizontal instance variables in the ship, and it also involves putting a reference
@@ -69,7 +68,13 @@ public class Ship {
 		object. (Note: This will be as many as four identical references; you can’t refer to
 		a part of a ship, only to the whole ship.)
 		*/
-		
+		for(int i = 0; i < this.getLength(); i++){
+			if (horizontal == true){
+				ocean.getShipArray()[row][column + i] = this;
+			} else {
+				ocean.getShipArray()[row + i][column] = this;
+			}
+		}
 	}
 	
 	boolean shootAt(int row, int column)  {
