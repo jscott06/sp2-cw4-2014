@@ -50,14 +50,35 @@ public class Ship {
 	}
 	
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
-		/* TODO
+		/*
 		Returns true if it is okay to put a ship of this length with its bow in this location,
 		with the given orientation, and returns false otherwise. The ship must not overlap
 		another ship, or touch another ship (vertically, horizontally, or diagonally), and it
 		must not stick out beyond the array. Does not actually change either the ship or
 		the Ocean, just says whether it is legal to do so.
 		 */
-		return false;
+		if (horizontal == true){
+			if (this.getLength() + column > 9){ // over the border
+				return false;
+			} else {
+				for(int i = 0; i < this.getLength(); i++){
+					if (ocean.isOccupied(row, column + i)){
+						return false;
+					}
+				}
+			}
+		} else {
+			if (this.getLength() + row > 9){ // over the border
+				return false;
+			} else {
+				for(int i = 0; i < this.getLength(); i++){
+					if (ocean.isOccupied(row + i, column)){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
