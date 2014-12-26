@@ -54,19 +54,47 @@ public class ShipTest {
 		
 		Ocean ocean = new Ocean();
 		Submarine submarine = new Submarine();
-		submarine.placeShipAt(0, 0, true, ocean);
+		submarine.placeShipAt(1, 0, true, ocean);
+		assertEquals(1, submarine.getBowRow());
 		assertEquals(0, submarine.getBowColumn());
-		assertEquals(0, submarine.getBowRow());
+
+		
+		Cruiser cruiser = new Cruiser();
+		cruiser.placeShipAt(3, 5, false, ocean);
+		assertEquals(3, cruiser.getBowRow());
+		assertEquals(5, cruiser.getBowColumn());
 		
 	}
 	
 	@Test
-	public void testHit(){
+	public void testHitAndSunk(){
 		
-	}
-	
-	@Test
-	public void testIsSunk(){
+		Ocean ocean = new Ocean();
+		
+		Battleship battleship = new Battleship();
+		battleship.placeShipAt(0, 0, true, ocean);
+		
+		Cruiser cruiser = new Cruiser();
+		cruiser.placeShipAt(3, 5, false, ocean);
+		
+		assertEquals(false, battleship.isSunk());
+		assertEquals(false, cruiser.isSunk());
+
+		// shoot on sea
+		assertEquals(false, ocean.isOccupied(2, 5));
+		assertEquals(false, battleship.shootAt(2, 5));
+		
+		// shoot to the boats and sunk them
+		assertEquals(true, battleship.shootAt(0, 0));
+		assertEquals(true, battleship.shootAt(0, 1));
+		assertEquals(true, battleship.shootAt(0, 2));
+		assertEquals(true, battleship.shootAt(0, 3));
+		assertEquals(true, battleship.isSunk());
+		
+		assertEquals(true, cruiser.shootAt(3, 5));
+		assertEquals(true, cruiser.shootAt(4, 5));
+		assertEquals(true, cruiser.shootAt(5, 5));
+		assertEquals(true, cruiser.isSunk());
 		
 	}
 
