@@ -16,6 +16,11 @@ public class BattleshipGame {
 			System.out.println("Hits: " + ocean.getHitCount());
 			ocean.print();
 		}
+		
+		System.out.println("You won, you're the master");
+		System.out.println("Fired shots: " + ocean.getShotsFired());
+		System.out.println("Hits: " + ocean.getHitCount());
+		ocean.print();
 
 	}
 	

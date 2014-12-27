@@ -161,14 +161,16 @@ public class Ocean {
 		from the BattleshipGame class.
 		 */
 		
-		System.out.println("   0  1  2  3  4  5  6  7  8  9 ");
+		System.out.println("   0  1  2  3  4  5  6  7  8  9 "); // prints columns
 		for(int row = 0; row < 10; row++){
-			System.out.print(row + " ");
+			System.out.print(row + " "); // prints rows
 			for(int column = 0; column < 10; column++){
 				if (getShipArray()[row][column].isSunk()){
-					System.out.print(" X ");
+					System.out.print(" X "); // prints sunk boats
 				} else if (!isOccupied(row, column)){
-					System.out.print(" . ");
+					System.out.print(" . "); // prints sea
+				} else if (isBow(row, column)){
+					System.out.print(" B "); // prints bows
 				} else {
 					System.out.print(" o ");
 				}
@@ -176,6 +178,16 @@ public class Ocean {
 			}
 			System.out.println();
 		}
+	}
+	
+	boolean isBow(int row, int column){
+		if (isOccupied(row, column)){
+			if (getShipArray()[row][column].getBowRow() == row &&
+				getShipArray()[row][column].getBowColumn() == column){
+					return true;
+			}
+		}
+		return false;
 	}
 
 }
