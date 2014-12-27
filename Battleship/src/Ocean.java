@@ -158,6 +158,18 @@ public class Ocean {
 		never called from within the Ocean class (except possibly during debugging), only
 		from the BattleshipGame class.
 		 */
+		
+		System.out.println("   0  1  2  3  4  5  6  7  8  9 ");
+		for(int row = 0; row < 10; row++){
+			System.out.print(row + " ");
+			for(int column = 0; column < 10; column++){
+				if (!isOccupied(column, row)){
+					System.out.print(" . ");
+					
+				}
+			}
+			System.out.println();
+		}
 	}
 
 }
