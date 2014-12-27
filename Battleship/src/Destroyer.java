@@ -2,7 +2,7 @@
 public class Destroyer extends Ship {
 	
 	Destroyer(){
-		setLength(2);
+		length = 2;
 		initializeHitArray();
 	}
 	

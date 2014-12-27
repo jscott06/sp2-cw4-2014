@@ -2,7 +2,7 @@
 public class Ship {
 	private int bowRow;
 	private int bowColumn;
-	private int length;
+	protected int length;
 	private boolean horizontal;
 	private boolean [] hit;
 	
@@ -39,10 +39,6 @@ public class Ship {
 	
 	int getLength(){
 		return length;
-	}
-	
-	void setLength(int length){
-		this.length = length;
 	}
 	
 	void setHorizontal(boolean horizontal){

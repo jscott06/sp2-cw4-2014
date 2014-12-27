@@ -2,7 +2,7 @@
 public class Battleship extends Ship {
 	
 	Battleship(){
-		setLength(4);
+		length = 4;
 		initializeHitArray();
 	}
 	

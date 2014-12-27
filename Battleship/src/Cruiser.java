@@ -2,7 +2,7 @@
 public class Cruiser extends Ship{
 	
 	Cruiser(){
-		setLength(3);
+		length = 3;
 		initializeHitArray();
 	}
 	
