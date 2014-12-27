@@ -5,6 +5,12 @@ public class Ocean {
 	private int hitCount;
 	private int shipsSunk;
 	
+	// to refactor/remove/move?
+	private int randomRow; 
+	private int randomColumn;
+	private int randomPosition;
+	private boolean randomBoolPosition;
+	
 	Ocean(){
 		/* TODO
 		The constructor Creates an empty ocean (fills the ships array with EmptySeas).
@@ -25,11 +31,48 @@ public class Ocean {
 	}
 	
 	void placeAllShipsRandomly() {
-		/* TODO
+		/* UNTESTABLE in a conventional way?
 		Place all ten ships randomly on the (initially empty) ocean. 
 		Place larger ships before smaller ones, or you may end up with 
 		no legal place to put a large ship. 
 		*/
+		Ship ships[] = new Ship[10];
+		ships[0] = new Battleship();
+		ships[1] = new Cruiser();
+		ships[2] = new Cruiser();
+		ships[3] = new Destroyer();
+		ships[4] = new Destroyer();
+		ships[5] = new Destroyer();
+		ships[6] = new Submarine();
+		ships[7] = new Submarine();
+		ships[8] = new Submarine();
+		ships[9] = new Submarine();
+		
+		for(Ship ship : ships){
+			generateRandomPosition();
+			while(!ship.okToPlaceShipAt(randomRow, randomColumn, randomBoolPosition, this)) {
+				generateRandomPosition();
+			}
+			while(ship.okToPlaceShipAt(randomRow, randomColumn, randomBoolPosition, this)) {
+				ship.placeShipAt(randomRow, randomColumn, randomBoolPosition, this);
+				System.out.println(
+						"Placed a " + ship.getShipType() +
+						" - Bow row: " + randomRow +
+						" - Bow column: " + randomColumn +
+						" - Horizontal: " + randomBoolPosition); // "test"
+			}
+		}
+	}
+	
+	void generateRandomPosition(){
+		randomRow = (int) (Math.random()*9);
+		randomColumn = (int) (Math.random()*9);
+		randomPosition = (int) (Math.random()*2);
+		if (randomPosition == 1){
+			randomBoolPosition = true;
+		} else {
+			randomBoolPosition = false;
+		}
 	}
 	
 	boolean isOccupied(int row, int column) {
@@ -37,7 +80,7 @@ public class Ocean {
 		Returns true if the given location contains
 		a ship, false if it does not.
 		*/
-		System.out.println(getShipArray()[row][column].getShipType()); // for debugging TO REMOVE
+//		System.out.println(getShipArray()[row][column].getShipType()); // for debugging TO REMOVE
 		if (getShipArray()[row][column].getShipType() == "EmptySea") {
 			return false;
 		} else { 
