@@ -46,8 +46,7 @@ public class Ocean {
 	}
 	
 	boolean shootAt(int row, int column)  {
-		
-		/* TODO
+		/*
 		Returns true if the given location contains
 		a real ship, still afloat, (not an EmptySea), false if it does not. In addition, this
 		method updates the number of shots that have been fired, and the number of hits.
@@ -55,12 +54,35 @@ public class Ocean {
 		the user shoots at that same location. Once a ship has been sunk, additional shots
 		at its location should return false.
 		*/
-		return false;
+		if (!isOccupied(row, column)){ // shooting on sea
+			fireShot();
+			return false;
+		}
+		if (!getShipArray()[row][column].isSunk()){
+			getShipArray()[row][column].shootAt(row, column);
+			fireShot();
+			hit();
+			if (getShipArray()[row][column].isSunk())
+				shipsSunk++; // add newly sunk ship to counter
+			return true;
+		} else { // shooting on sunk boat
+			fireShot();
+			return false;
+		}
 	}
 	
 	int getShotsFired(){
 		return shotsFired;
 	}
+	
+	void hit(){
+		hitCount++;
+	}
+	
+	void fireShot(){
+		shotsFired++;
+	}
+
 	int getHitCount() {
 		return hitCount;
 	}
@@ -68,9 +90,12 @@ public class Ocean {
 		return shipsSunk;
 	}
 	boolean isGameOver() {
-		// TODO
 		// Returns true if all ships have been sunk, otherwise false.
-		return false;
+		if (getShipsSunk() < 10){
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	Ship[][] getShipArray() {
