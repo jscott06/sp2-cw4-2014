@@ -9,7 +9,7 @@ public class EmptySea extends Ship {
 		return false;
 	}
 	@Override boolean isSunk() {
-		/* TODO
+		/*
 		This method overrides isSunk() that is inherited from Ship, 
 		and always returns false to indicate that you didn’t sink anything.
 		 */

@@ -25,7 +25,7 @@ public class Ocean {
 	private void fillSea(){
 		for(int row = 0; row < 10; row++){
 			for(int column = 0; column < 10; column++){
-				ships[column][row] = new EmptySea();
+				ships[row][column] = new EmptySea();
 			}
 		}
 	}
@@ -103,9 +103,11 @@ public class Ocean {
 		}
 		if (!getShipArray()[row][column].isSunk()){
 			getShipArray()[row][column].shootAt(row, column);
+			
 			fireShot();
 			hit();
 			if (getShipArray()[row][column].isSunk())
+				System.out.println("You sank a " + getShipArray()[row][column].getShipType());
 				shipsSunk++; // add newly sunk ship to counter
 			return true;
 		} else { // shooting on sunk boat
@@ -163,10 +165,14 @@ public class Ocean {
 		for(int row = 0; row < 10; row++){
 			System.out.print(row + " ");
 			for(int column = 0; column < 10; column++){
-				if (!isOccupied(column, row)){
+				if (getShipArray()[row][column].isSunk()){
+					System.out.print(" X ");
+				} else if (!isOccupied(row, column)){
 					System.out.print(" . ");
-					
+				} else {
+					System.out.print(" o ");
 				}
+				
 			}
 			System.out.println();
 		}

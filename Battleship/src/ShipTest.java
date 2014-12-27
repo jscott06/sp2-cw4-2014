@@ -97,5 +97,4 @@ public class ShipTest {
 		assertEquals(true, cruiser.isSunk());
 		
 	}
-
 }
