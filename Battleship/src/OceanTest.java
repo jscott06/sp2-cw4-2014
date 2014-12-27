@@ -87,7 +87,7 @@ public class OceanTest {
 		assertEquals(true, ocean.shootAt(8, 7));
 		assertEquals(7, ocean.getShotsFired());
 		assertEquals(5, ocean.getHitCount());
-		assertEquals(2, ocean.getShipsSunk());
+		assertEquals(5, ocean.getShipsSunk());
 		
 	}
 	
@@ -157,4 +157,31 @@ public class OceanTest {
 		assertEquals(true, ocean.isGameOver());
 		
 	}
+	
+	@Test
+	public void isHitSection() {
+		
+		Ocean ocean = new Ocean();
+		
+		Cruiser cruiser1 = new Cruiser();
+		Cruiser cruiser2 = new Cruiser();
+		cruiser1.placeShipAt(5, 0, true, ocean);
+		cruiser2.placeShipAt(0, 0, false, ocean);
+		
+		// horizontal ship
+		assertEquals(false, ocean.isHitSection(5, 1));
+		assertEquals(true, ocean.shootAt(5, 1));
+		assertEquals(true, ocean.shootAt(5, 2));
+		assertEquals(true, ocean.isHitSection(5, 1));
+		assertEquals(true, ocean.isHitSection(5, 2));
+
+		// vertical ship
+		assertEquals(false, ocean.isHitSection(0, 0));
+		assertEquals(true, ocean.shootAt(1, 0));
+		assertEquals(true, ocean.shootAt(2, 0));
+		assertEquals(true, ocean.isHitSection(1, 0));
+		assertEquals(true, ocean.isHitSection(2, 0));
+		
+	}
+		
 }

@@ -167,12 +167,12 @@ public class Ocean {
 			for(int column = 0; column < 10; column++){
 				if (getShipArray()[row][column].isSunk()){
 					System.out.print(" X "); // prints sunk boats
-				} else if (!isOccupied(row, column)){
-					System.out.print(" . "); // prints sea
-				} else if (isBow(row, column)){
-					System.out.print(" B "); // prints bows
+				} else if (isHitSection(row, column)){
+					System.out.print(" S "); // prints bows
+				} else if (isOccupied(row, column)){
+					System.out.print(" o "); // prints sea
 				} else {
-					System.out.print(" o ");
+					System.out.print(" . ");
 				}
 				
 			}
@@ -180,11 +180,24 @@ public class Ocean {
 		}
 	}
 	
-	boolean isBow(int row, int column){
+	boolean isHitSection(int row, int column){
 		if (isOccupied(row, column)){
-			if (getShipArray()[row][column].getBowRow() == row &&
-				getShipArray()[row][column].getBowColumn() == column){
-					return true;
+			if (getShipArray()[row][column].isHorizontal()){
+				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
+					if  (getShipArray()[row][column].getHits()[i] == true){
+						if (getShipArray()[row][column].getBowColumn() + i == column){
+							return true;
+						}
+					}
+				}
+			} else {
+				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
+					if  (getShipArray()[row][column].getHits()[i] == true){
+						if (getShipArray()[row][column].getBowRow() + i == row){
+							return true;
+						}
+					}
+				}
 			}
 		}
 		return false;
