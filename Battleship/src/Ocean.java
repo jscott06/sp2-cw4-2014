@@ -80,7 +80,6 @@ public class Ocean {
 		Returns true if the given location contains
 		a ship, false if it does not.
 		*/
-//		System.out.println(getShipArray()[row][column].getShipType()); // for debugging TO REMOVE
 		if (getShipArray()[row][column].getShipType() == "EmptySea") {
 			return false;
 		} else { 
@@ -98,6 +97,7 @@ public class Ocean {
 		at its location should return false.
 		*/
 		if (!isOccupied(row, column)){ // shooting on sea
+			getShipArray()[row][column].shootAt(row, column);
 			fireShot();
 			return false;
 		}
@@ -148,59 +148,83 @@ public class Ocean {
 	}
 	
 	void print() {
-		/* TODO
-		Prints the ocean. To aid the user, row numbers should be displayed along
-		the left edge of the array, and column numbers should be displayed along the top.
-		Numbers should be 0 to 9, not 1 to 10. The top left corner square should be 0,
-		0. Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
-		’-’ to indicate a location that you have fired upon and found nothing there, ’x’
-		to indication location containing a sunken ship, and ’.’ to indicate a location
-		that you have never fired upon.
-		This is the only method in the Ocean class that does any input/output, and it is
-		never called from within the Ocean class (except possibly during debugging), only
-		from the BattleshipGame class.
-		 */
-		
+	/* TODO
+	Prints the ocean. To aid the user, row numbers should be displayed along
+	the left edge of the array, and column numbers should be displayed along the top.
+	Numbers should be 0 to 9, not 1 to 10. The top left corner square should be 0,
+	0. Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
+	’-’ to indicate a location that you have fired upon and found nothing there, ’x’
+	to indication location containing a sunken ship, and ’.’ to indicate a location
+	that you have never fired upon.
+	This is the only method in the Ocean class that does any input/output, and it is
+	never called from within the Ocean class (except possibly during debugging), only
+	from the BattleshipGame class.
+	 */
 		System.out.println("   0  1  2  3  4  5  6  7  8  9 "); // prints columns
 		for(int row = 0; row < 10; row++){
 			System.out.print(row + " "); // prints rows
 			for(int column = 0; column < 10; column++){
-				if (getShipArray()[row][column].isSunk()){
-					System.out.print(" X "); // prints sunk boats
-				} else if (isHitSection(row, column)){
-					System.out.print(" S "); // prints bows
-				} else if (isOccupied(row, column)){
-					System.out.print(" o "); // prints sea
-				} else {
-					System.out.print(" . ");
-				}
-				
+				System.out.print(" " + getShipArray()[row][column] + " ");
 			}
 			System.out.println();
 		}
+		
 	}
 	
-	boolean isHitSection(int row, int column){
-		if (isOccupied(row, column)){
-			if (getShipArray()[row][column].isHorizontal()){
-				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
-					if  (getShipArray()[row][column].getHits()[i] == true){
-						if (getShipArray()[row][column].getBowColumn() + i == column){
-							return true;
-						}
-					}
-				}
-			} else {
-				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
-					if  (getShipArray()[row][column].getHits()[i] == true){
-						if (getShipArray()[row][column].getBowRow() + i == row){
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+//	void print() {
+//		/* TODO
+//		Prints the ocean. To aid the user, row numbers should be displayed along
+//		the left edge of the array, and column numbers should be displayed along the top.
+//		Numbers should be 0 to 9, not 1 to 10. The top left corner square should be 0,
+//		0. Use ’S’ to indicate a location that you have fired upon and hit a (real) ship,
+//		’-’ to indicate a location that you have fired upon and found nothing there, ’x’
+//		to indication location containing a sunken ship, and ’.’ to indicate a location
+//		that you have never fired upon.
+//		This is the only method in the Ocean class that does any input/output, and it is
+//		never called from within the Ocean class (except possibly during debugging), only
+//		from the BattleshipGame class.
+//		 */
+//		
+//		System.out.println("   0  1  2  3  4  5  6  7  8  9 "); // prints columns
+//		for(int row = 0; row < 10; row++){
+//			System.out.print(row + " "); // prints rows
+//			for(int column = 0; column < 10; column++){
+//				if (getShipArray()[row][column].isSunk()){
+//					System.out.print(" X "); // prints sunk boats
+//				} else if (isHitSection(row, column)){
+//					System.out.print(" S "); // prints bows
+//				} else if (isOccupied(row, column)){
+//					System.out.print(" o "); // prints sea
+//				} else {
+//					System.out.print(" . ");
+//				}
+//				
+//			}
+//			System.out.println();
+//		}
+//	}
+//	
+//	boolean isHitSection(int row, int column){
+//		if (isOccupied(row, column)){
+//			if (getShipArray()[row][column].isHorizontal()){
+//				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
+//					if  (getShipArray()[row][column].getHits()[i] == true){
+//						if (getShipArray()[row][column].getBowColumn() + i == column){
+//							return true;
+//						}
+//					}
+//				}
+//			} else {
+//				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
+//					if  (getShipArray()[row][column].getHits()[i] == true){
+//						if (getShipArray()[row][column].getBowRow() + i == row){
+//							return true;
+//						}
+//					}
+//				}
+//			}
+//		}
+//		return false;
+//	}
 
 }

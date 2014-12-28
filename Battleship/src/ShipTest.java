@@ -97,4 +97,40 @@ public class ShipTest {
 		assertEquals(true, cruiser.isSunk());
 		
 	}
+	@Test
+	public void testPrinting(){
+		Ocean ocean = new Ocean();
+		
+		Battleship battleship = new Battleship();
+		EmptySea sea = new EmptySea();
+		
+		// empty sea cell
+		assertEquals(".", ocean.getShipArray()[0][0].toString());
+		
+		// shoot at empty sea
+		assertEquals(false, ocean.shootAt(0, 0));
+		
+		// shot empty sea cell
+		assertEquals("-", ocean.getShipArray()[0][0].toString());
+
+		// place ship
+		battleship.placeShipAt(0, 0, true, ocean);
+
+		// ship cell
+		assertEquals("o", ocean.getShipArray()[0][0].toString());
+	
+		// shoot at ship cell
+		assertEquals(true, battleship.shootAt(0, 0));
+		// shot ship cell
+		assertEquals("S", ocean.getShipArray()[0][0].toString());
+		
+		// sink ship
+		assertEquals(true, battleship.shootAt(0, 1));
+		assertEquals(true, battleship.shootAt(0, 2));
+		assertEquals(true, battleship.shootAt(0, 3));
+		
+		// sunk ship cell
+		assertEquals("X", ocean.getShipArray()[0][0].toString());
+		
+	}
 }

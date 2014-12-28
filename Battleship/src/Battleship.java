@@ -10,10 +10,5 @@ public class Battleship extends Ship {
 	String getShipType() {
 		return "battleship";
 	}
-	@Override 
-	public String toString() {
-		//TODO
-		return "";
-	}
 
 }

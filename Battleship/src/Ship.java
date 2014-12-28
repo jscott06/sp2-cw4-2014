@@ -132,4 +132,12 @@ public class Ship {
 		return true;
 		
 	}
+	
+	@Override public String toString(){
+		if (isSunk()) {
+			return "X";
+		}
+		return "o"; // to be replaced with "."
+		
+	}
 }
