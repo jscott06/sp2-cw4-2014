@@ -25,10 +25,10 @@ public class ShipTest {
 		assertEquals(1, submarine.getLength());
 		assertEquals(false, battleship.getHits()[0]);
 	}
-	
+
 	@Test
 	public void testOkToPlaceShipAt(){
-		
+
 		Ocean ocean = new Ocean();
 		Battleship battleship = new Battleship();
 		
@@ -48,7 +48,7 @@ public class ShipTest {
 		assertEquals(false, battleship2.okToPlaceShipAt(0, 2, true, ocean));
 		assertEquals(false, battleship2.okToPlaceShipAt(0, 2, false, ocean));
 	}
-	
+
 	@Test
 	public void testPlaceShipAt(){
 		
@@ -65,7 +65,7 @@ public class ShipTest {
 		assertEquals(5, cruiser.getBowColumn());
 		
 	}
-	
+
 	@Test
 	public void testHitAndSunk(){
 		
@@ -95,8 +95,9 @@ public class ShipTest {
 		assertEquals(true, cruiser.shootAt(4, 5));
 		assertEquals(true, cruiser.shootAt(5, 5));
 		assertEquals(true, cruiser.isSunk());
-		
+
 	}
+
 	@Test
 	public void testPrinting(){
 		Ocean ocean = new Ocean();
@@ -131,6 +132,7 @@ public class ShipTest {
 		
 		// sunk ship cell
 		assertEquals("X", ocean.getShipArray()[0][0].toString());
-		
+
 	}
+
 }
