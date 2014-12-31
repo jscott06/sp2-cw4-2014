@@ -122,8 +122,6 @@ public class ShipTest {
 	
 		// shoot at ship cell
 		assertEquals(true, battleship.shootAt(0, 0));
-		// shot ship cell
-		assertEquals("S", ocean.getShipArray()[0][0].toString());
 		
 		// sink ship
 		assertEquals(true, battleship.shootAt(0, 1));

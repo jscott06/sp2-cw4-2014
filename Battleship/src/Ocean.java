@@ -96,18 +96,20 @@ public class Ocean {
 		the user shoots at that same location. Once a ship has been sunk, additional shots
 		at its location should return false.
 		*/
+		Ship ship = getShipArray()[row][column];
+		
 		if (!isOccupied(row, column)){ // shooting on sea
-			getShipArray()[row][column].shootAt(row, column);
+			ship.shootAt(row, column);
 			fireShot();
 			return false;
 		}
-		if (!getShipArray()[row][column].isSunk()){
-			getShipArray()[row][column].shootAt(row, column);
+		if (!ship.isSunk()){
+			ship.shootAt(row, column);
 			
 			fireShot();
 			hit();
-			if (getShipArray()[row][column].isSunk())
-				System.out.println("You sank a " + getShipArray()[row][column].getShipType());
+			if (ship.isSunk())
+				System.out.println("You sank a " + ship.getShipType());
 				shipsSunk++; // add newly sunk ship to counter
 			return true;
 		} else { // shooting on sunk boat
@@ -164,10 +166,12 @@ public class Ocean {
 		for(int row = 0; row < 10; row++){
 			System.out.print(row + " "); // prints rows
 			for(int column = 0; column < 10; column++){
-				if (isHitSection(row, column) && !getShipArray()[row][column].isSunk()){
+				Ship ship = getShipArray()[row][column];
+				
+				if (isHitSection(row, column) && !ship.isSunk()){
 					System.out.print(" S ");
 				} else {
-					System.out.print(" " + getShipArray()[row][column] + " ");
+					System.out.print(" " + ship + " ");
 				}
 			}
 			System.out.println();
@@ -176,19 +180,19 @@ public class Ocean {
 	}
 	
 	boolean isHitSection(int row, int column){
+		Ship ship = getShipArray()[row][column];
+		
 		if (isOccupied(row, column)){
-			if (getShipArray()[row][column].isHorizontal()){
-				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
-					if  (getShipArray()[row][column].getHits()[i] == true){
-						if (getShipArray()[row][column].getBowColumn() + i == column){
+			for(int i = 0; i < ship.getHits().length; i++){
+				if (ship.isHorizontal()){
+					if  (ship.getHits()[i] == true){
+						if (ship.getBowColumn() + i == column){
 							return true;
 						}
 					}
-				}
-			} else {
-				for(int i = 0; i < getShipArray()[row][column].getHits().length; i++){
-					if  (getShipArray()[row][column].getHits()[i] == true){
-						if (getShipArray()[row][column].getBowRow() + i == row){
+				} else {
+					if  (ship.getHits()[i] == true){
+						if (ship.getBowRow() + i == row){
 							return true;
 						}
 					}

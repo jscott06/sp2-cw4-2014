@@ -2,9 +2,14 @@ import java.util.Scanner;
 
 
 public class BattleshipGame {
+	
+	// TODO
+	// - Fix end game bug (does not count sunk ship properly)
+	// - Add exceptions (ie, typing something that is not 0-9)
+	
+	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Ocean ocean = new Ocean();
 		ocean.placeAllShipsRandomly();
 		ocean.print();
@@ -21,19 +26,17 @@ public class BattleshipGame {
 		System.out.println("Fired shots: " + ocean.getShotsFired());
 		System.out.println("Hits: " + ocean.getHitCount());
 		
-
+		in.close();
 	}
 	
 	// BOTH TO REFACTOR
 	static int getRow(){
-		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter the row you want to shoot at (0-9): ");
 		int row = in.nextInt();
 		return row;
 		
 	}
 	static int getColumn(){
-		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter the column you want to shoot at (0-9): ");
 		int column = in.nextInt();
 		return column;
