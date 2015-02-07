@@ -10,6 +10,7 @@ public class Ocean {
 	private int randomColumn;
 	private int randomPosition;
 	private boolean randomBoolPosition;
+	private int sideLength = 9;
 	
 	Ocean(){
 		/* TODO
@@ -65,8 +66,8 @@ public class Ocean {
 	}
 	
 	void generateRandomPosition(){
-		randomRow = (int) (Math.random()*9);
-		randomColumn = (int) (Math.random()*9);
+		randomRow = (int) (Math.random()*sideLength);
+		randomColumn = (int) (Math.random()*sideLength);
 		randomPosition = (int) (Math.random()*2);
 		if (randomPosition == 1){
 			randomBoolPosition = true;
