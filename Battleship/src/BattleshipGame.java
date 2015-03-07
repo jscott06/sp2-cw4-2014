@@ -4,10 +4,10 @@ import java.util.Scanner;
 public class BattleshipGame {
 	
 	// TODO
-	// - Add exceptions (ie, typing something that is not 0-9)
 	// refactoring all around
 	
-	static Scanner in = new Scanner(System.in);
+	static Scanner IN = new Scanner(System.in);
+	static String ALLOWED_INPUT = "\\d{1}";
 
 	public static void main(String[] args) {
 		Ocean ocean = new Ocean();
@@ -15,7 +15,7 @@ public class BattleshipGame {
 		ocean.print();
 
 		while(!ocean.isGameOver()){
-			ocean.shootAt(getRow(), getColumn());
+			ocean.shootAt(getInput("column"), getInput("row"));
 			ocean.print();
 			System.out.println("Fired shots: " + ocean.getShotsFired());
 			System.out.println("Hits: " + ocean.getHitCount());
@@ -27,21 +27,19 @@ public class BattleshipGame {
 		System.out.println("Fired shots: " + ocean.getShotsFired());
 		System.out.println("Hits: " + ocean.getHitCount());
 		System.out.println("Ships sunk:" + ocean.getShipsSunk());
-		in.close();
+		IN.close();
 	}
 	
-	// BOTH TO REFACTOR
-	static int getRow(){
-		System.out.println("Please enter the row you want to shoot at (0-9): ");
-		int row = in.nextInt();
-		return row;
-		
+	static int getInput(String columnOrRow){
+		boolean valid = false;
+		String input = null;
+		while (!valid){
+			System.out.println("Please enter the " + columnOrRow + " number you want to shoot at (only 0-9 accepted): ");
+			input = IN.nextLine();
+			if (input.matches(ALLOWED_INPUT)){
+				valid = true;
+			}
+		}
+		return Integer.parseInt(input);
 	}
-	static int getColumn(){
-		System.out.println("Please enter the column you want to shoot at (0-9): ");
-		int column = in.nextInt();
-		return column;
-		
-	}
-
 }
