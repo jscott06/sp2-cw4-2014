@@ -5,7 +5,7 @@ public class BattleshipGame {
 	
 	// TODO
 	// refactoring all around
-	
+
 	static Scanner IN = new Scanner(System.in);
 	static String ALLOWED_INPUT = "\\d{1}";
 
@@ -16,21 +16,15 @@ public class BattleshipGame {
 
 		while(!ocean.isGameOver()){
 			ocean.shootAt(getInput("column"), getInput("row"));
-			ocean.print();
-			System.out.println("Fired shots: " + ocean.getShotsFired());
-			System.out.println("Hits: " + ocean.getHitCount());
-			System.out.println("Ships sunk:" + ocean.getShipsSunk());
+			printGameStatus(ocean);
 		}
-		
-		ocean.print();
 		System.out.println("You won, you're the master");
-		System.out.println("Fired shots: " + ocean.getShotsFired());
-		System.out.println("Hits: " + ocean.getHitCount());
-		System.out.println("Ships sunk:" + ocean.getShipsSunk());
+		printGameStatus(ocean);
+		
 		IN.close();
 	}
 	
-	static int getInput(String columnOrRow){
+	private static int getInput(String columnOrRow){
 		boolean valid = false;
 		String input = null;
 		while (!valid){
@@ -41,5 +35,12 @@ public class BattleshipGame {
 			}
 		}
 		return Integer.parseInt(input);
+	}
+	
+	private static void printGameStatus(Ocean ocean){
+	  ocean.print();
+	  System.out.println("Fired shots: " + ocean.getShotsFired());
+      System.out.println("Hits: " + ocean.getHitCount());
+      System.out.println("Ships sunk:" + ocean.getShipsSunk()); 
 	}
 }
