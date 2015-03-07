@@ -21,6 +21,10 @@ public class Ship {
     return hit;
   }
 
+  void setHit(int sectionHit){
+    hit[sectionHit] = true;
+  }
+
   int getBowRow() {
     return bowRow;
   }
@@ -95,7 +99,7 @@ public class Ship {
     setBowColumn(column);
 
     for(int i = 0; i < this.getLength(); i++){
-      if (horizontal == true){
+      if (isHorizontal()){
         ocean.getShipArray()[row][column + i] = this;
       } else {
         ocean.getShipArray()[row + i][column] = this;
@@ -109,22 +113,35 @@ public class Ship {
     and column, and the ship hasn’t been sunk, mark that part of the ship as hit (in
     the hit array, 0 indicates the bow) and return true, otherwise return false.
      */
-    if (!isSunk()){
-      if (getBowRow() == row || getBowColumn() == column){ // must be on same column or row
-        for(int i = 0; i < this.getLength(); i++){
-          if (isHorizontal()){
-            if (getBowColumn() + i == column){ // will need to check if has been hit already
-              getHits()[i] = true; // mark as hit
-              checkHits();
-              return true;
-            }
-          } else {
-            if (getBowRow() + i == row){ // will need to check if has been hit already
-              getHits()[i] = true; // mark as hit
-              checkHits();
-              return true;
-            }
-          }
+    for(int i = 0; i < this.getLength(); i++){
+      if (isHorizontal()){
+        if (getBowColumn() + i == column){
+          setHit(i); // mark as hit
+          checkHits();
+          return true;
+        }
+      } else {
+        if (getBowRow() + i == row){
+          setHit(i); // mark as hit
+          checkHits();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  boolean isASectionThatHasBeenAlreadyShot(int row, int column)  {
+    for(int i = 0; i < this.getLength(); i++){
+      if (isHorizontal()){
+        if (getBowColumn() + i == column){
+          if (getHits()[i])
+            return true;
+        }
+      } else {
+        if (getBowRow() + i == row){
+          if (getHits()[i])
+            return true;
         }
       }
     }

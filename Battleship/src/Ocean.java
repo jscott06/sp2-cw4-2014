@@ -103,15 +103,15 @@ public class Ocean {
     if (!isOccupied(row, column)){ // shooting on sea
       ship.shootAt(row, column);
       return false;
-    } else if (!ship.isSunk()){
+    } else if (ship.isASectionThatHasBeenAlreadyShot(row, column) || ship.isSunk()) {
+      return false;
+    } else { // shooting on a not hit section of a ship
       ship.shootAt(row, column);
       hit();
       if (ship.isSunk()) {
         shipsSunk++; // add newly sunk ship to counter
       }
       return true;
-    } else { // shooting on sunk boat
-      return false;
     }
   }
 

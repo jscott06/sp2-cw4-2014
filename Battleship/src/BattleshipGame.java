@@ -4,6 +4,7 @@ public class BattleshipGame {
 
   // TODO
   // refactoring all around
+  // re-set un-hit sections of ships back to printing "."
 
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";
