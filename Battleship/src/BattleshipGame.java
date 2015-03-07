@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class BattleshipGame {
 	
 	// TODO
-	// - Fix end game bug (does not count sunk ship properly)
 	// - Add exceptions (ie, typing something that is not 0-9)
+	// refactoring all around
 	
 	static Scanner in = new Scanner(System.in);
 
@@ -19,13 +19,14 @@ public class BattleshipGame {
 			ocean.print();
 			System.out.println("Fired shots: " + ocean.getShotsFired());
 			System.out.println("Hits: " + ocean.getHitCount());
+			System.out.println("Ships sunk:" + ocean.getShipsSunk());
 		}
 		
 		ocean.print();
 		System.out.println("You won, you're the master");
 		System.out.println("Fired shots: " + ocean.getShotsFired());
 		System.out.println("Hits: " + ocean.getHitCount());
-		
+		System.out.println("Ships sunk:" + ocean.getShipsSunk());
 		in.close();
 	}
 	

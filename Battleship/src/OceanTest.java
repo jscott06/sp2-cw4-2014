@@ -87,7 +87,7 @@ public class OceanTest {
 		assertEquals(true, ocean.shootAt(8, 7));
 		assertEquals(7, ocean.getShotsFired());
 		assertEquals(5, ocean.getHitCount());
-		assertEquals(5, ocean.getShipsSunk());
+		assertEquals(2, ocean.getShipsSunk());
 		
 	}
 	

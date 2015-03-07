@@ -60,7 +60,7 @@ public class Ocean {
 						"Placed a " + ship.getShipType() +
 						" - Bow row: " + randomRow +
 						" - Bow column: " + randomColumn +
-						" - Horizontal: " + randomBoolPosition); // "test"
+						" - Horizontal: " + randomBoolPosition);
 			}
 		}
 	}
@@ -98,23 +98,19 @@ public class Ocean {
 		at its location should return false.
 		*/
 		Ship ship = getShipArray()[row][column];
-		
+		fireShot();
+
 		if (!isOccupied(row, column)){ // shooting on sea
 			ship.shootAt(row, column);
-			fireShot();
 			return false;
-		}
-		if (!ship.isSunk()){
+		} else if (!ship.isSunk()){
 			ship.shootAt(row, column);
-			
-			fireShot();
 			hit();
-			if (ship.isSunk())
-				System.out.println("You sank a " + ship.getShipType());
+			if (ship.isSunk()) {
 				shipsSunk++; // add newly sunk ship to counter
+			}
 			return true;
 		} else { // shooting on sunk boat
-			fireShot();
 			return false;
 		}
 	}
@@ -177,7 +173,6 @@ public class Ocean {
 			}
 			System.out.println();
 		}
-		
 	}
 	
 	boolean isHitSection(int row, int column){

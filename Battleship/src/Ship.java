@@ -5,8 +5,14 @@ public class Ship {
 	protected int length;
 	private boolean horizontal;
 	private boolean [] hit;
+	private boolean sunk;
+	
+	Ship(){
+		setSunk(false);
+	}
 	
 	void initializeHitArray(){	
+		// move within ship constructor
 		hit = new boolean[getLength()];
 		for(int i = 0; i < hit.length; i++){
 			hit[i] = false;
@@ -110,11 +116,13 @@ public class Ship {
 					if (isHorizontal()){
 						if (getBowColumn() + i == column){ // will need to check if has been hit already
 							getHits()[i] = true; // mark as hit
+							checkHits();
 							return true;
 						}
 					} else {
 						if (getBowRow() + i == row){ // will need to check if has been hit already
 							getHits()[i] = true; // mark as hit
+							checkHits();
 							return true;
 						}
 					}
@@ -125,12 +133,24 @@ public class Ship {
 	}
 	
 	boolean isSunk(){
-		for(boolean hit : getHits()){
-			if (hit == false)
+		return sunk;
+	}
+
+	private boolean checkHits() {
+		for (boolean section : getHits()){
+			
+			if (!section){
+				setSunk(false);
 				return false;
+			}
 		}
-		return true;
 		
+		setSunk(true);
+		return true;
+	}
+	
+	private void setSunk(boolean sunk){
+		this.sunk = sunk;
 	}
 	
 	@Override public String toString(){
@@ -140,4 +160,6 @@ public class Ship {
 		return "o"; // to be replaced with "."
 		
 	}
+
+
 }
