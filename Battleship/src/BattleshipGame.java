@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class BattleshipGame {
 
   // TODO
-  // refactoring all around
   // re-set un-hit sections of ships back to printing "."
+  // okay to place ship at should not place ships next to each other
 
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";
