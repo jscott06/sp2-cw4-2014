@@ -1,3 +1,14 @@
+/**
+ * @author Jacopo Scotti
+ * @since 19/12/2014
+ *
+ * Coursework4
+ * - The objective of this coursework is building a Battleship game
+ *   that can be played only in solo version
+ * - In order to win the game the User must sink all the ships that
+ *   have been automatically placed on the board by the program
+ */
+
 public class Ship {
   private int bowRow;
   private int bowColumn;
@@ -10,8 +21,11 @@ public class Ship {
     setSunk(false);
   }
 
+  /**
+   * initializeHitArray() method sets all the element in the hit array to
+   * false (not hit).
+   */
   void initializeHitArray(){
-    // move within ship constructor
     hit = new boolean[getLength()];
     for(int i = 0; i < hit.length; i++){
       hit[i] = false;
@@ -54,14 +68,19 @@ public class Ship {
     this.horizontal = horizontal;
   }
 
+  /**
+   * okToPlaceShipAt() method determines whether is okay to place a Ship in the
+   * Ocean ( @param ocean) using the coordinates provided with @param bowRow,
+   * @param bowColumn and @param horizontal.
+   * The methods checks if:
+   * - the Ship would fall over the board
+   * - the Ship would be placed over other Ships
+   * - the Ship would be placed immediately adjacent (horizontally, vertically
+   *   or diagonally) to other ships
+   * If any of the above conditions is true, the the method @return value will
+   * be false, true otherwise.
+   */
   boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
-    /*
-    Returns true if it is okay to put a ship of this length with its bow in this location,
-    with the given orientation, and returns false otherwise. The ship must not overlap
-    another ship, or touch another ship (vertically, horizontally, or diagonally), and it
-    must not stick out beyond the array. Does not actually change either the ship or
-    the Ocean, just says whether it is legal to do so.
-     */
     if (horizontal == true){
       if (this.getLength() + column > 9){ // over the border
         return false;
@@ -86,14 +105,14 @@ public class Ship {
     return true;
   }
 
+  /**
+   * placeShipAt() method places a Ship in the Ocean ( @param ocean) using the
+   * coordinates provided with @param bowRow, @param bowColumn and @param horizontal.
+   * and horizontal parameters. The method puts a reference to the ship
+   * in each of 1 or more locations (up to 4) in the ships array in the Ocean
+   * object.
+   */
   void placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
-    /*
-    Puts the ship in the ocean. This involves giving values to the bowRow, bowColumn, and
-    horizontal instance variables in the ship, and it also involves putting a reference
-    to the ship in each of 1 or more locations (up to 4) in the ships array in the Ocean
-    object. (Note: This will be as many as four identical references; you can’t refer to
-    a part of a ship, only to the whole ship.)
-     */
     setHorizontal(horizontal);
     setBowRow(row);
     setBowColumn(column);
@@ -107,12 +126,14 @@ public class Ship {
     }
   }
 
+  /**
+   * shootAt() method is used for shooting at cell in the ships array in the Ocean
+   * Object. It will shoot at the cell with coordinates provided in @param row
+   * and @param column.
+   * When shooting on a valid Ship object, the method calls automatically the
+   * setHit() checkHits() methods and the @returns true, false otherwise.
+   */
   boolean shootAt(int row, int column)  {
-    /*
-    If a part of the ship occupies the given row
-    and column, and the ship hasn’t been sunk, mark that part of the ship as hit (in
-    the hit array, 0 indicates the bow) and return true, otherwise return false.
-     */
     for(int i = 0; i < this.getLength(); i++){
       if (isHorizontal()){
         if (getBowColumn() + i == column){
@@ -131,6 +152,12 @@ public class Ship {
     return false;
   }
 
+  /**
+   * isASectionThatHasBeenAlreadyShot() receives @param row and @param column.
+   * It searches through the Ships array in the Ocean object and @return true
+   * if at the coordinates provided there is a section of a Ship that has been
+   * hit already.
+   */
   boolean isASectionThatHasBeenAlreadyShot(int row, int column)  {
     for(int i = 0; i < this.getLength(); i++){
       if (isHorizontal()){
@@ -152,6 +179,11 @@ public class Ship {
     return sunk;
   }
 
+  /**
+   * checkHits() method checks if all the sections of the Ship have been hit,
+   * in that case it would sunk the Ship using the setSunk() method and @return true,
+   * false otherwise.
+   */
   private boolean checkHits() {
     for (boolean section : getHits()){
       if (!section){
