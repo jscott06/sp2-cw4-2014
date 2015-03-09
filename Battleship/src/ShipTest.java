@@ -49,6 +49,15 @@ public class ShipTest {
   }
 
   @Test
+  public void TestfallsOutOfTheBoard(){
+    Cruiser cruiser = new Cruiser();
+    assertEquals(false, cruiser.fallsOutOfTheBoard(3, 5, false));
+    assertEquals(true, cruiser.fallsOutOfTheBoard(9, 5, false));
+    assertEquals(false, cruiser.fallsOutOfTheBoard(3, 5, true));
+    assertEquals(true, cruiser.fallsOutOfTheBoard(3, 9, true));
+  }
+
+  @Test
   public void testPlaceShipAt(){
 
     Ocean ocean = new Ocean();

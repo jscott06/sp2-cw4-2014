@@ -105,6 +105,18 @@ public class Ship {
     return true;
   }
 
+
+  boolean fallsOutOfTheBoard(int bowRow, int bowColumn, boolean horizontal){
+    if (horizontal){
+      if (this.getLength() + bowColumn > 9)
+        return true;
+    } else {
+      if (this.getLength() + bowRow > 9)
+        return true;
+    }
+    return false;
+  }
+
   /**
    * placeShipAt() method places a Ship in the Ocean ( @param ocean) using the
    * coordinates provided with @param bowRow, @param bowColumn and @param horizontal.
