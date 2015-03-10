@@ -117,6 +117,23 @@ public class Ship {
     return false;
   }
 
+  boolean shipSectionHasImmediatelyAdjacentShip(int cellRow, int cellColumn, Ocean ocean){
+    int tempRow;
+    int tempColumn;
+    for(int r = -1; r <= 1; r++){
+      for(int c = -1; c <= 1; c++){
+        tempRow = cellRow + r;
+        tempColumn = cellColumn + c;
+        if ((tempRow >= 0 && tempRow < 9 )&&(tempColumn >= 0 && tempColumn < 9)){
+          if (ocean.isOccupied(tempRow, tempColumn)){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   /**
    * placeShipAt() method places a Ship in the Ocean ( @param ocean) using the
    * coordinates provided with @param bowRow, @param bowColumn and @param horizontal.

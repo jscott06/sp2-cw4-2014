@@ -49,12 +49,22 @@ public class ShipTest {
   }
 
   @Test
-  public void TestfallsOutOfTheBoard(){
+  public void TestFallsOutOfTheBoard(){
     Cruiser cruiser = new Cruiser();
     assertEquals(false, cruiser.fallsOutOfTheBoard(3, 5, false));
     assertEquals(true, cruiser.fallsOutOfTheBoard(9, 5, false));
     assertEquals(false, cruiser.fallsOutOfTheBoard(3, 5, true));
     assertEquals(true, cruiser.fallsOutOfTheBoard(3, 9, true));
+  }
+
+  @Test
+  public void TestShipSectionHasImmediatelyAdjacentShip(){
+    Ocean ocean = new Ocean();
+    Cruiser cruiser1 = new Cruiser();
+    cruiser1.placeShipAt(0, 0, true, ocean);
+    Cruiser cruiser2 = new Cruiser();
+    assertEquals(true, cruiser2.shipSectionHasImmediatelyAdjacentShip(1, 1, ocean));
+    assertEquals(false, cruiser2.shipSectionHasImmediatelyAdjacentShip(5, 5, ocean));
   }
 
   @Test
