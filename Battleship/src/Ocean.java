@@ -66,8 +66,8 @@ public class Ocean {
   }
 
   void generateRandomPosition(){
-    randomRow = (int) (Math.random()*sideLength);
-    randomColumn = (int) (Math.random()*sideLength);
+    randomRow = (int) (Math.random()*(sideLength + 1));
+    randomColumn = (int) (Math.random()*(sideLength + 1));
     randomPosition = (int) (Math.random()*2);
     if (randomPosition == 1){
       randomBoolPosition = true;
