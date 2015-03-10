@@ -4,7 +4,7 @@ public class BattleshipGame {
 
   // TODO
   // re-set un-hit sections of ships back to printing "."
-  // okay to place ship at should not place ships next to each other
+  // fix bug that does not allow ships to be placed on row 9 or column 9
 
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";

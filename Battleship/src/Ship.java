@@ -81,24 +81,18 @@ public class Ship {
    * be false, true otherwise.
    */
   boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
+    if (fallsOutOfTheBoard(row, column, horizontal))
+      return false;
     if (horizontal == true){
-      if (this.getLength() + column > 9){ // over the border
-        return false;
-      } else {
-        for(int i = 0; i < this.getLength(); i++){
-          if (ocean.isOccupied(row, column + i)){
-            return false;
-          }
+      for(int i = 0; i < this.getLength(); i++){
+        if (shipSectionHasImmediatelyAdjacentShip(row, column + i, ocean)){
+          return false;
         }
       }
     } else {
-      if (this.getLength() + row > 9){ // over the border
-        return false;
-      } else {
-        for(int i = 0; i < this.getLength(); i++){
-          if (ocean.isOccupied(row + i, column)){
-            return false;
-          }
+      for(int i = 0; i < this.getLength(); i++){
+        if (shipSectionHasImmediatelyAdjacentShip(row + i, column, ocean)){
+          return false;
         }
       }
     }
@@ -124,7 +118,7 @@ public class Ship {
       for(int c = -1; c <= 1; c++){
         tempRow = cellRow + r;
         tempColumn = cellColumn + c;
-        if ((tempRow >= 0 && tempRow < 9 )&&(tempColumn >= 0 && tempColumn < 9)){
+        if ((tempRow >= 0 && tempRow <= 9 )&&(tempColumn >= 0 && tempColumn <= 9)){
           if (ocean.isOccupied(tempRow, tempColumn)){
             return true;
           }
