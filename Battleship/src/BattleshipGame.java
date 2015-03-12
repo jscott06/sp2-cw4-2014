@@ -4,7 +4,8 @@ public class BattleshipGame {
 
   // TODO
   // re-set un-hit sections of ships back to printing "."
-  // document all around
+  // replace magic numbers (use Shiparray[0] for 0 and ShipArray.length
+
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";
 
@@ -15,14 +16,22 @@ public class BattleshipGame {
 
     while(!ocean.isGameOver()){
       ocean.shootAt(getInput("column"), getInput("row"));
-      printGameStatus(ocean);
+      ocean.print();
+      System.out.println("Fired shots: " + ocean.getShotsFired());
+      System.out.println("Hits: " + ocean.getHitCount());
+      System.out.println("Ships sunk:" + ocean.getShipsSunk());
     }
-    System.out.println("You won, you're the master");
-    printGameStatus(ocean);
+    System.out.println("You won, you're the master of Battleships!!");
 
     IN.close();
   }
 
+  /**
+   * getInput with the aid of @param columnOrRow is used to ask user input.
+   * The method checks if the user input is not valid, in that case it will
+   * prompt the user again until he/she will have input a single digit number.
+   * If the input is valid, it converts it to an integer and @returns it
+   */
   private static int getInput(String columnOrRow){
     boolean valid = false;
     String input = null;
@@ -34,12 +43,5 @@ public class BattleshipGame {
       }
     }
     return Integer.parseInt(input);
-  }
-
-  private static void printGameStatus(Ocean ocean){
-    ocean.print();
-    System.out.println("Fired shots: " + ocean.getShotsFired());
-    System.out.println("Hits: " + ocean.getHitCount());
-    System.out.println("Ships sunk:" + ocean.getShipsSunk());
   }
 }

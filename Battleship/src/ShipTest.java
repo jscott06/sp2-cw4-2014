@@ -118,7 +118,6 @@ public class ShipTest {
     Ocean ocean = new Ocean();
 
     Battleship battleship = new Battleship();
-    EmptySea sea = new EmptySea();
 
     // empty sea cell
     assertEquals(".", ocean.getShipArray()[0][0].toString());

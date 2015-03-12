@@ -15,11 +15,7 @@ public class Ship {
   protected int length;
   private boolean horizontal;
   private boolean [] hit;
-  private boolean sunk;
-
-  Ship(){
-    setSunk(false);
-  }
+  private boolean sunk = false;
 
   /**
    * initializeHitArray() method sets all the element in the hit array to
@@ -31,48 +27,83 @@ public class Ship {
       hit[i] = false;
     }
   }
+
+  /**
+   * getHits method is used to @return hit variable
+   */
   boolean [] getHits(){
     return hit;
   }
 
-  void setHit(int sectionHit){
-    hit[sectionHit] = true;
+  /**
+   * @param indexOfSectionHit is used for marking the respective section of
+   * the ship as hit
+   */
+  void setHit(int indexOfSectionHit){
+    hit[indexOfSectionHit] = true;
   }
 
+  /**
+   * getBowRow method is used to @return bowRow variable
+   */
   int getBowRow() {
     return bowRow;
   }
+
+  /**
+   * setBowRow method is used for setting a new value as bowRow
+   */
   void setBowRow(int bowRow) {
     this.bowRow = bowRow;
   }
+
+  /**
+   * getBowColumn method is used to @return bowColumn variable
+   */
   int getBowColumn() {
     return bowColumn;
   }
+  /**
+   * getBowColumn method is used for setting a new value as bowColumn
+   */
   void setBowColumn(int bowColumn) {
     this.bowColumn = bowColumn;
   }
 
+  /**
+   * isHorizontal is used to @return horizontal variable value
+   */
   boolean isHorizontal(){
     return horizontal;
   }
 
+  /**
+   * is used to set the value of this.horizontal with @param horizontal
+   */
+  void setHorizontal(boolean horizontal){
+    this.horizontal = horizontal;
+  }
+
+  /**
+   * getShipType is used to @return the type of the ship as a String value
+   */
   String getShipType(){
     return "Ship";
   }
 
+  /**
+   * getLength is used to @return length value
+   */
   int getLength(){
     return length;
-  }
-
-  void setHorizontal(boolean horizontal){
-    this.horizontal = horizontal;
   }
 
   /**
    * okToPlaceShipAt() method determines whether is okay to place a Ship in the
    * Ocean ( @param ocean) using the coordinates provided with @param bowRow,
    * @param bowColumn and @param horizontal.
-   * The methods checks if:
+   * The method, with the aid of fallsOutOfTheBoard and shipSectionHasImmediatelyAdjacentShip
+   * methods, checks if:
    * - the Ship would fall over the board
    * - the Ship would be placed over other Ships
    * - the Ship would be placed immediately adjacent (horizontally, vertically
@@ -99,7 +130,11 @@ public class Ship {
     return true;
   }
 
-
+  /**
+   * fallsOutOfTheBoard checks if the Ship with given @param bowRow
+   * @param bowColumn and @param horizontal would fall over the board.
+   * @return value is true when the Ship does not fall outside the board
+   */
   boolean fallsOutOfTheBoard(int bowRow, int bowColumn, boolean horizontal){
     if (horizontal){
       if (this.getLength() + bowColumn > 9)
@@ -111,6 +146,12 @@ public class Ship {
     return false;
   }
 
+  /**
+   * shipSectionHasImmediatelyAdjacentShip given @param cellRow, @param cellColumn
+   * and @param ocean, checks if a cell is surrounded by a Ship or if it would be placed
+   * on a Ship.
+   * @return value is false when the ship is not surrounded by a Ship, true otherwise.
+   */
   boolean shipSectionHasImmediatelyAdjacentShip(int cellRow, int cellColumn, Ocean ocean){
     int tempRow;
     int tempColumn;
@@ -129,7 +170,7 @@ public class Ship {
   }
 
   /**
-   * placeShipAt() method places a Ship in the Ocean ( @param ocean) using the
+   * placeShipAt method places a Ship in the Ocean ( @param ocean) using the
    * coordinates provided with @param bowRow, @param bowColumn and @param horizontal.
    * and horizontal parameters. The method puts a reference to the ship
    * in each of 1 or more locations (up to 4) in the ships array in the Ocean
@@ -150,7 +191,7 @@ public class Ship {
   }
 
   /**
-   * shootAt() method is used for shooting at cell in the ships array in the Ocean
+   * shootAt method is used for shooting at cell in the ships array in the Ocean
    * Object. It will shoot at the cell with coordinates provided in @param row
    * and @param column.
    * When shooting on a valid Ship object, the method calls automatically the
@@ -160,13 +201,13 @@ public class Ship {
     for(int i = 0; i < this.getLength(); i++){
       if (isHorizontal()){
         if (getBowColumn() + i == column){
-          setHit(i); // mark as hit
+          setHit(i);
           checkHits();
           return true;
         }
       } else {
         if (getBowRow() + i == row){
-          setHit(i); // mark as hit
+          setHit(i);
           checkHits();
           return true;
         }
@@ -176,7 +217,7 @@ public class Ship {
   }
 
   /**
-   * isASectionThatHasBeenAlreadyShot() receives @param row and @param column.
+   * isASectionThatHasBeenAlreadyShot receives @param row and @param column.
    * It searches through the Ships array in the Ocean object and @return true
    * if at the coordinates provided there is a section of a Ship that has been
    * hit already.
@@ -198,12 +239,15 @@ public class Ship {
     return false;
   }
 
+  /**
+   * isSunk is used to @return sunk value
+   */
   boolean isSunk(){
     return sunk;
   }
 
   /**
-   * checkHits() method checks if all the sections of the Ship have been hit,
+   * checkHits method checks if all the sections of the Ship have been hit,
    * in that case it would sunk the Ship using the setSunk() method and @return true,
    * false otherwise.
    */
@@ -218,6 +262,9 @@ public class Ship {
     return true;
   }
 
+  /**
+   * is used to set this.sunk to @param sunk value
+   */
   private void setSunk(boolean sunk){
     this.sunk = sunk;
   }
