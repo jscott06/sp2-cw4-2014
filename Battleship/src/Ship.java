@@ -273,7 +273,7 @@ public class Ship {
     if (isSunk()) {
       return "X";
     }
-    return "o"; // to be replaced with "."
+    return ".";
   }
 
 }
