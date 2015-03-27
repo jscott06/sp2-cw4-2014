@@ -4,8 +4,6 @@ public class BattleshipGame {
 
   // TODO
   // replace magic numbers (use Shiparray[0] for 0 and ShipArray.length
-  // add end of game test
-  // add replay option
 
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";

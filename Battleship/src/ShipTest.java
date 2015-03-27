@@ -33,11 +33,9 @@ public class ShipTest {
 
     assertEquals(true, battleship.okToPlaceShipAt(0, 0, true, ocean));
 
-    // going over the border
     assertEquals(false, battleship.okToPlaceShipAt(0, 9, true, ocean));
     assertEquals(false, battleship.okToPlaceShipAt(9, 0, false, ocean));
 
-    // going over other boats
     Battleship battleship2 = new Battleship();
     assertEquals(true, battleship2.okToPlaceShipAt(0, 2, true, ocean));
     assertEquals(true, battleship2.okToPlaceShipAt(0, 2, false, ocean));
@@ -69,7 +67,6 @@ public class ShipTest {
 
   @Test
   public void testPlaceShipAt(){
-
     Ocean ocean = new Ocean();
     Submarine submarine = new Submarine();
     submarine.placeShipAt(1, 0, true, ocean);
@@ -84,7 +81,6 @@ public class ShipTest {
 
   @Test
   public void testHitAndSunk(){
-
     Ocean ocean = new Ocean();
 
     Battleship battleship = new Battleship();
@@ -96,11 +92,9 @@ public class ShipTest {
     assertEquals(false, battleship.isSunk());
     assertEquals(false, cruiser.isSunk());
 
-    // shoot on sea
     assertEquals(false, ocean.isOccupied(2, 5));
     assertEquals(false, battleship.shootAt(2, 5));
 
-    // shoot to the boats and sunk them
     assertEquals(true, battleship.shootAt(0, 0));
     assertEquals(true, battleship.shootAt(0, 1));
     assertEquals(true, battleship.shootAt(0, 2));
@@ -116,33 +110,23 @@ public class ShipTest {
   @Test
   public void testPrinting(){
     Ocean ocean = new Ocean();
-
     Battleship battleship = new Battleship();
 
-    // empty sea cell
     assertEquals(".", ocean.getShipArray()[0][0].toString());
 
-    // shoot at empty sea
-    assertEquals(false, ocean.shootAt(0, 0));
+    ocean.shootAt(0, 0);
 
-    // shot empty sea cell
     assertEquals("-", ocean.getShipArray()[0][0].toString());
 
-    // place ship
     battleship.placeShipAt(0, 0, true, ocean);
 
-    // ship cell
-    assertEquals("o", ocean.getShipArray()[0][0].toString());
+    assertEquals(".", ocean.getShipArray()[0][0].toString());
 
-    // shoot at ship cell
-    assertEquals(true, battleship.shootAt(0, 0));
+    battleship.shootAt(0, 0);
+    battleship.shootAt(0, 1);
+    battleship.shootAt(0, 2);
+    battleship.shootAt(0, 3);
 
-    // sink ship
-    assertEquals(true, battleship.shootAt(0, 1));
-    assertEquals(true, battleship.shootAt(0, 2));
-    assertEquals(true, battleship.shootAt(0, 3));
-
-    // sunk ship cell
     assertEquals("X", ocean.getShipArray()[0][0].toString());
   }
 

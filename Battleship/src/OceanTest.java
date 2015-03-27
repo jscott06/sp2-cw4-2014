@@ -11,56 +11,53 @@ public class OceanTest {
     Cruiser cruiser = new Cruiser();
     Battleship battleship = new Battleship();
 
-    // sea
     assertEquals(false, ocean.isOccupied(0, 0));
-    // horizontal submarine will be placed here
+
     assertEquals(false, ocean.isOccupied(1, 0));
-    // horizontal destroyer will be placed here
+
     assertEquals(false, ocean.isOccupied(5, 0));
     assertEquals(false, ocean.isOccupied(5, 1));
-    // sea
+
     assertEquals(false, ocean.isOccupied(5, 2));
-    // vertical cruiser will be placed here
+
     assertEquals(false, ocean.isOccupied(2, 5));
     assertEquals(false, ocean.isOccupied(3, 5));
     assertEquals(false, ocean.isOccupied(4, 5));
-    // sea
+
     assertEquals(false, ocean.isOccupied(5, 5));
-    // vertical battleship will be placed here
+
     assertEquals(false, ocean.isOccupied(5, 7));
     assertEquals(false, ocean.isOccupied(6, 7));
     assertEquals(false, ocean.isOccupied(7, 7));
     assertEquals(false, ocean.isOccupied(8, 7));
-    // sea
+
     assertEquals(false, ocean.isOccupied(9, 7));
 
-    // placing ships
     submarine.placeShipAt(1, 0, true, ocean);
     destroyer.placeShipAt(5, 0, true, ocean);
     cruiser.placeShipAt(2, 5, false, ocean);
     battleship.placeShipAt(5, 7, false, ocean);
 
-    // sea
     assertEquals(false, ocean.isOccupied(0, 0));
-    // horizontal submarine
+
     assertEquals(true, ocean.isOccupied(1, 0));
-    // horizontal destroyer
+
     assertEquals(true, ocean.isOccupied(5, 0));
     assertEquals(true, ocean.isOccupied(5, 1));
-    // sea
+
     assertEquals(false, ocean.isOccupied(5, 2));
-    // vertical cruiser
+
     assertEquals(true, ocean.isOccupied(2, 5));
     assertEquals(true, ocean.isOccupied(3, 5));
     assertEquals(true, ocean.isOccupied(4, 5));
-    // sea
+
     assertEquals(false, ocean.isOccupied(5, 5));
-    // vertical battleship
+
     assertEquals(true, ocean.isOccupied(5, 7));
     assertEquals(true, ocean.isOccupied(6, 7));
     assertEquals(true, ocean.isOccupied(7, 7));
     assertEquals(true, ocean.isOccupied(8, 7));
-    // sea
+
     assertEquals(false, ocean.isOccupied(9, 7));
   }
 
@@ -81,22 +78,18 @@ public class OceanTest {
     assertEquals(0, ocean.getShotsFired());
     assertEquals(0, ocean.getShipsSunk());
 
-    // shoot on sea
     assertEquals(false, ocean.shootAt(0, 0));
     assertEquals(1, ocean.getShotsFired());
 
-    // shoot and sink submarine
     assertEquals(true, ocean.shootAt(1, 0));
     assertEquals(2, ocean.getShotsFired());
     assertEquals(1, ocean.getHitCount());
     assertEquals(1, ocean.getShipsSunk());
 
-    // shoot on sunk submarine
     assertEquals(false, ocean.shootAt(1, 0));
     assertEquals(3, ocean.getShotsFired());
     assertEquals(1, ocean.getHitCount());
 
-    // shoot on battleship
     assertEquals(true, ocean.shootAt(5, 7));
     assertEquals(true, ocean.shootAt(6, 7));
     assertEquals(true, ocean.shootAt(7, 7));
@@ -104,12 +97,10 @@ public class OceanTest {
     assertEquals(7, ocean.getShotsFired());
     assertEquals(5, ocean.getHitCount());
     assertEquals(2, ocean.getShipsSunk());
-
   }
 
   @Test
   public void isGameOver() {
-
     Ocean ocean = new Ocean();
 
     Submarine submarine1 = new Submarine();
@@ -142,29 +133,29 @@ public class OceanTest {
 
     assertEquals(false, ocean.isGameOver());
 
-    // sink submarines
     assertEquals(true, ocean.shootAt(0, 0));
     assertEquals(true, ocean.shootAt(1, 0));
+
     assertEquals(true, ocean.shootAt(2, 0));
     assertEquals(true, ocean.shootAt(3, 0));
 
-    // sink destroyers
     assertEquals(true, ocean.shootAt(7, 0));
     assertEquals(true, ocean.shootAt(7, 1));
+
     assertEquals(true, ocean.shootAt(8, 0));
     assertEquals(true, ocean.shootAt(8, 1));
+
     assertEquals(true, ocean.shootAt(9, 0));
     assertEquals(true, ocean.shootAt(9, 1));
 
-    // sink cruisers
     assertEquals(true, ocean.shootAt(5, 0));
     assertEquals(true, ocean.shootAt(5, 1));
     assertEquals(true, ocean.shootAt(5, 2));
+
     assertEquals(true, ocean.shootAt(6, 0));
     assertEquals(true, ocean.shootAt(6, 1));
     assertEquals(true, ocean.shootAt(6, 2));
 
-    // sink battleship
     assertEquals(true, ocean.shootAt(0, 9));
     assertEquals(true, ocean.shootAt(1, 9));
     assertEquals(true, ocean.shootAt(2, 9));
@@ -175,7 +166,6 @@ public class OceanTest {
 
   @Test
   public void isHitSection() {
-
     Ocean ocean = new Ocean();
 
     Cruiser cruiser1 = new Cruiser();
@@ -183,14 +173,12 @@ public class OceanTest {
     cruiser1.placeShipAt(5, 0, true, ocean);
     cruiser2.placeShipAt(0, 0, false, ocean);
 
-    // horizontal ship
     assertEquals(false, ocean.isHitSection(5, 1));
     assertEquals(true, ocean.shootAt(5, 1));
     assertEquals(true, ocean.shootAt(5, 2));
     assertEquals(true, ocean.isHitSection(5, 1));
     assertEquals(true, ocean.isHitSection(5, 2));
 
-    // vertical ship
     assertEquals(false, ocean.isHitSection(0, 0));
     assertEquals(true, ocean.shootAt(1, 0));
     assertEquals(true, ocean.shootAt(2, 0));
