@@ -9,6 +9,7 @@ public class Ocean {
   private int randomPosition;
   private boolean randomBoolPosition;
   private int SIDE_LENGTH = 9;
+  private int NUMBER_OF_SHIPS = 10;
 
   /**
    * The constructor Creates an empty ocean (fills the ships array with EmptySeas).
@@ -23,8 +24,8 @@ public class Ocean {
    * and assigns it to an EmptySea class
    */
   private void fillSea(){
-    for(int row = 0; row < 10; row++){
-      for(int column = 0; column < 10; column++){
+    for(int row = 0; row <= get_side_length(); row++){
+      for(int column = 0; column <= get_side_length(); column++){
         ships[row][column] = new EmptySea();
       }
     }
@@ -37,7 +38,7 @@ public class Ocean {
    * to put a large ship.
    */
   void placeAllShipsRandomly() {
-    Ship ships[] = new Ship[10];
+    Ship ships[] = new Ship[NUMBER_OF_SHIPS];
     ships[0] = new Battleship();
     ships[1] = new Cruiser();
     ships[2] = new Cruiser();
@@ -65,8 +66,8 @@ public class Ocean {
    * used for placing Ships on the board
    */
   void generateRandomPositions(){
-    randomRow = (int) (Math.random()*(SIDE_LENGTH + 1));
-    randomColumn = (int) (Math.random()*(SIDE_LENGTH + 1));
+    randomRow = (int) (Math.random()*(get_side_length() + 1));
+    randomColumn = (int) (Math.random()*(get_side_length() + 1));
     randomPosition = (int) (Math.random()*2);
     if (randomPosition == 1){
       randomBoolPosition = true;
@@ -167,7 +168,7 @@ public class Ocean {
    * false otherwise
    */
   boolean isGameOver() {
-    if (getShipsSunk() < 10){
+    if (getShipsSunk() < NUMBER_OF_SHIPS){
       return false;
     } else {
       return true;
@@ -195,9 +196,9 @@ public class Ocean {
    */
   void print() {
     System.out.println("\n   0  1  2  3  4  5  6  7  8  9 "); // prints columns
-    for(int row = 0; row < 10; row++){
+    for(int row = 0; row <= get_side_length(); row++){
       System.out.print(row + " "); // prints rows
-      for(int column = 0; column < 10; column++){
+      for(int column = 0; column <= get_side_length(); column++){
         Ship ship = getShipArray()[row][column];
 
         if (isHitSection(row, column) && !ship.isSunk()){
@@ -237,6 +238,14 @@ public class Ocean {
       }
     }
     return false;
+  }
+
+  /**
+   * get_side_length @return the side length of the board, removing the necessity
+   * of having other classes knowing about the size of it.
+   */
+  int get_side_length() {
+    return SIDE_LENGTH;
   }
 
 }

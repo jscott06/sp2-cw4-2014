@@ -112,7 +112,7 @@ public class Ship {
    * be false, true otherwise.
    */
   boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
-    if (fallsOutOfTheBoard(row, column, horizontal))
+    if (fallsOutOfTheBoard(row, column, horizontal, ocean))
       return false;
     if (horizontal == true){
       for(int i = 0; i < this.getLength(); i++){
@@ -132,15 +132,15 @@ public class Ship {
 
   /**
    * fallsOutOfTheBoard checks if the Ship with given @param bowRow
-   * @param bowColumn and @param horizontal would fall over the board.
+   * @param bowColumn, @param horizontal and @param ocean would fall over the board.
    * @return value is true when the Ship does not fall outside the board
    */
-  boolean fallsOutOfTheBoard(int bowRow, int bowColumn, boolean horizontal){
+  boolean fallsOutOfTheBoard(int bowRow, int bowColumn, boolean horizontal, Ocean ocean){
     if (horizontal){
-      if (this.getLength() + bowColumn > 9)
+      if (this.getLength() + bowColumn > ocean.get_side_length())
         return true;
     } else {
-      if (this.getLength() + bowRow > 9)
+      if (this.getLength() + bowRow > ocean.get_side_length())
         return true;
     }
     return false;
@@ -159,7 +159,7 @@ public class Ship {
       for(int c = -1; c <= 1; c++){
         tempRow = cellRow + r;
         tempColumn = cellColumn + c;
-        if ((tempRow >= 0 && tempRow <= 9 )&&(tempColumn >= 0 && tempColumn <= 9)){
+        if ((tempRow >= 0 && tempRow <= ocean.get_side_length() )&&(tempColumn >= 0 && tempColumn <= ocean.get_side_length())){
           if (ocean.isOccupied(tempRow, tempColumn)){
             return true;
           }

@@ -2,9 +2,6 @@ import java.util.Scanner;
 
 public class BattleshipGame {
 
-  // TODO
-  // replace magic numbers (use Shiparray[0] for 0 and ShipArray.length
-
   static Scanner IN = new Scanner(System.in);
   static String ALLOWED_INPUT = "\\d{1}";
 
